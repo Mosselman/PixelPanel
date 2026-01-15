@@ -37,7 +37,7 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
+          "drill": 0.65,
           "height": 1.0,
           "width": 1.0
         },
@@ -490,7 +490,9 @@
     "meta": {
       "version": 4
     },
-    "net_colors": null,
+    "net_colors": {
+      "GND": "rgb(255, 226, 128)"
+    },
     "netclass_assignments": null,
     "netclass_patterns": []
   },

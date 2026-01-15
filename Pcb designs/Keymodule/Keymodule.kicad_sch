@@ -3543,19 +3543,6 @@
 		(uuid 8ca65a0c-a2e8-4c42-8f75-99a5f1d08710)
 	)
 	(rectangle
-		(start 167.005 191.135)
-		(end 293.37 280.67)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill
-			(type color)
-			(color 120 120 120 0.38)
-		)
-		(uuid bd5e4f47-6c1a-41cd-9148-f20a753eb550)
-	)
-	(rectangle
 		(start 213.995 14.605)
 		(end 265.43 43.18)
 		(stroke
@@ -7973,7 +7960,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 280.67 231.14 0)
 			(effects
 				(font
@@ -8659,7 +8646,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 212.09 276.86 0)
 			(effects
 				(font
@@ -8795,7 +8782,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 234.95 231.14 0)
 			(effects
 				(font
@@ -8929,7 +8916,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 189.23 276.86 0)
 			(effects
 				(font
@@ -8997,7 +8984,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 234.95 276.86 0)
 			(effects
 				(font
@@ -9219,7 +9206,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 212.09 215.9 0)
 			(effects
 				(font
@@ -10168,7 +10155,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 189.23 246.38 0)
 			(effects
 				(font
@@ -10379,7 +10366,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 257.81 261.62 0)
 			(effects
 				(font
@@ -10992,7 +10979,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 257.81 231.14 0)
 			(effects
 				(font
@@ -11157,7 +11144,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 280.67 276.86 0)
 			(effects
 				(font
@@ -11387,7 +11374,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 257.81 246.38 0)
 			(effects
 				(font
@@ -11521,7 +11508,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 257.81 215.9 0)
 			(effects
 				(font
@@ -12030,7 +12017,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 189.23 215.9 0)
 			(effects
 				(font
@@ -12682,7 +12669,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 189.23 261.62 0)
 			(effects
 				(font
@@ -13412,7 +13399,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 212.09 231.14 0)
 			(effects
 				(font
@@ -13714,7 +13701,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 257.81 276.86 0)
 			(effects
 				(font
@@ -14014,7 +14001,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 234.95 246.38 0)
 			(effects
 				(font
@@ -14736,7 +14723,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 234.95 261.62 0)
 			(effects
 				(font
@@ -14913,73 +14900,6 @@
 			(project ""
 				(path "/8c3d34a5-d640-4303-a3a8-a4a01dc90234"
 					(reference "U3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 374.65 41.91 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b93ee52f-d9f6-4f77-95db-e5181caea2b4")
-		(property "Reference" "#PWR028"
-			(at 374.65 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 374.65 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 374.65 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 374.65 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 374.65 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "580e1e4f-f9c5-4a1b-863c-bb5a72637488")
-		)
-		(instances
-			(project "Keymodule"
-				(path "/8c3d34a5-d640-4303-a3a8-a4a01dc90234"
-					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -15564,7 +15484,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 212.09 246.38 0)
 			(effects
 				(font
@@ -15845,7 +15765,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 280.67 261.62 0)
 			(effects
 				(font
@@ -16706,7 +16626,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 280.67 246.38 0)
 			(effects
 				(font
@@ -17081,7 +17001,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 280.67 215.9 0)
 			(effects
 				(font
@@ -17149,7 +17069,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 189.23 231.14 0)
 			(effects
 				(font
@@ -17393,7 +17313,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 212.09 261.62 0)
 			(effects
 				(font
@@ -17694,7 +17614,7 @@
 				)
 			)
 		)
-		(property "Footprint" "1_Custom_library:Kailh Switch 1350"
+		(property "Footprint" "1_Custom_library:Kailh low profile Choc switch V1"
 			(at 234.95 215.9 0)
 			(effects
 				(font
