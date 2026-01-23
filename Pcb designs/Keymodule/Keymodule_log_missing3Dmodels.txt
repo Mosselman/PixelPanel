@@ -1,0 +1,1 @@
+[('Y1', 'C:\\Program Files\\KiCad\\9.0\\share\\kicad\\3dmodels\\Oscillator.3dshapes\\Oscillator_SMD_SiT_PQFN-4Pin_2.0x1.6mm.step')]

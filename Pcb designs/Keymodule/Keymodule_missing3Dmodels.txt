@@ -1,0 +1,10 @@
+### Missing 3D models - created on 2026-01-20 19:28
+### Printed by checking_3D_models plugin
+Board file: E:\1. Personal projects\PixelPanel\Pcb designs\Keymodule\Keymodule.kicad_pcb
+3D missing models written to:
+E:\1. Personal projects\PixelPanel\Pcb designs\Keymodule\Keymodule_missing3Dmodels.txt
+-------
+('Y1', 'C:\\Program Files\\KiCad\\9.0\\share\\kicad\\3dmodels\\Oscillator.3dshapes\\Oscillator_SMD_SiT_PQFN-4Pin_2.0x1.6mm.step')
+-------
+NUM of 3D missing models:1
+checked extensions ['.stp', '.step', '.stpZ']
