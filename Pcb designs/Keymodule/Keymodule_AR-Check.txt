@@ -6,6 +6,36 @@ Testing PCB for Annular Rings
 TH Pads >= 0.125 Vias >= 0.125
 PHD margin on PTH = 0
 
-VIAS that Pass = 42; Fails = 0
-TH PADS that Pass = 72; Fails = 0
+AR Via violation of 0.075 at XY 84.226,70.4
+AR Via violation of 0.075 at XY 86.6,67.9
+AR Via violation of 0.075 at XY 83.575,71.6
+AR Via violation of 0.075 at XY 85.9,67.7
+AR Via violation of 0.075 at XY 83.6,68.8
+AR Via violation of 0.075 at XY 83.8,69.8
+AR Via violation of 0.075 at XY 83.594742,70.819742
+AR Via violation of 0.075 at XY 87.3,68.1
+AR Via violation of 0.075 at XY 84.4,68.0
+AR Via violation of 0.075 at XY 85.2,67.6
+AR Via violation of 0.075 at XY 40.2,79.0
+AR Via violation of 0.075 at XY 40.35,77.75
+AR Via violation of 0.075 at XY 39.28,77.75
+AR Via violation of 0.075 at XY 37.14,77.75
+AR Via violation of 0.075 at XY 38.21,77.75
+AR Via violation of 0.075 at XY 40.0,77.0
+AR Via violation of 0.075 at XY 41.4,79.0
+AR Via violation of 0.075 at XY 36.6,77.0
+AR Via violation of 0.075 at XY 39.15,77.0
+AR Via violation of 0.075 at XY 37.8,79.0
+AR Via violation of 0.075 at XY 36.6,78.3
+AR Via violation of 0.075 at XY 41.42,77.75
+AR Via violation of 0.075 at XY 39.0,79.0
+AR Via violation of 0.075 at XY 38.74,78.3
+AR Via violation of 0.075 at XY 40.88,78.3
+AR Via violation of 0.075 at XY 36.6,79.0
+AR Via violation of 0.075 at XY 39.81,78.3
+AR Via violation of 0.075 at XY 37.45,77.0
+AR Via violation of 0.075 at XY 38.3,77.0
+AR Via violation of 0.075 at XY 37.67,78.3
+VIAS that Pass = 63; Fails = 30
+TH PADS that Pass = 65; Fails = 0
 NPTH PADS that Pass = 0; Fails = 0
