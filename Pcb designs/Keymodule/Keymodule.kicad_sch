@@ -5751,6 +5751,16 @@
 	)
 	(wire
 		(pts
+			(xy 115.57 120.65) (xy 115.57 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6995a2e1-0b65-45a9-81a8-137f42d88f10")
+	)
+	(wire
+		(pts
 			(xy 24.13 60.96) (xy 24.13 58.42)
 		)
 		(stroke
@@ -10625,7 +10635,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_1x03_P1.27mm_Horizontal"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal"
 			(at 300.99 30.48 0)
 			(effects
 				(font
@@ -12825,7 +12835,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_1x03_P1.27mm_Horizontal"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal"
 			(at 281.94 30.48 0)
 			(effects
 				(font
