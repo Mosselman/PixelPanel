@@ -5,7 +5,7 @@
       "Application": "Pcbnew",
       "Version": "9.0.2"
     },
-    "CreationDate": "2026-01-27T21:16:03+01:00"
+    "CreationDate": "2026-02-16T21:11:57+01:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
@@ -14,7 +14,7 @@
       "Revision": "rev?"
     },
     "Size": {
-      "X": 91.05,
+      "X": 91.0501,
       "Y": 91.05
     },
     "LayerNumber": 4,
@@ -71,11 +71,6 @@
     {
       "Path": "Keymodule-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
-      "FilePolarity": "Positive"
-    },
-    {
-      "Path": "Keymodule-B_Silkscreen.gbr",
-      "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {

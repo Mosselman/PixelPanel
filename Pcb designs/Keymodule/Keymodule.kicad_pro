@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 0.8,
-          "width": 0.9
+          "height": 0.5,
+          "width": 1.0
         },
         "silk_line_width": 0.155,
         "silk_text_italic": false,
@@ -515,7 +515,7 @@
       "plot": "Geber/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "Keymodule.step",
+      "step": "../../Case design/pcb.step",
       "svg": "",
       "vrml": ""
     },
