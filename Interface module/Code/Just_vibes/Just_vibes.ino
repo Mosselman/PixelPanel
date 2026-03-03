@@ -90,11 +90,6 @@ static const int SCREEN_WIDTH  = 128;
 static const int SCREEN_HEIGHT = 32;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-// ----------------- Provisioning (edit these) -----------------
-static const char *POP          = "abcd1234";     // Proof-of-possession (Security 1)
-static const char *SERVICE_NAME = "PROV_ESP32";   // Shown in provisioning app
-// ------------------------------------------------------------
-
 // WiFi status flag (set from event callback)
 volatile bool g_wifiConnected = false;
 
@@ -141,32 +136,6 @@ int potToIndex(int raw) {
   return map(raw, 0, 4095, 0, 2);
 }
 
-void drawMenu(int index) {
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(SSD1306_WHITE);
-
-  display.setCursor(0, 0);
-  display.println("Menu:");
-
-  for (int i = 0; i < 3; i++) {
-    int y = 10 + i * 7;
-    display.setCursor(0, y);
-
-    if (i == index) {
-      display.fillRect(0, y - 1, 128, 8, SSD1306_WHITE);
-      display.setTextColor(SSD1306_BLACK);
-      display.print("> ");
-      display.print(MENU_ITEMS[i]);
-      display.setTextColor(SSD1306_WHITE);
-    } else {
-      display.print("  ");
-      display.print(MENU_ITEMS[i]);
-    }
-  }
-
-  display.display();
-}
 
 void drawOptionScreen(int option) {
   display.clearDisplay();
@@ -317,12 +286,7 @@ void setup() {
 
   pinMode(PIN_BUTTON, INPUT_PULLUP);
 
-  Wire.begin(I2C_SDA, I2C_SCL);
-  Wire.setClock(400000);
 
-  if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
-    while (true) { delay(100); }
-  }
 
   // 1) Provision + connect WiFi (show QR during setup)
   startProvisioning();
