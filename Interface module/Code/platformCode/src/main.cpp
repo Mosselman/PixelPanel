@@ -6,12 +6,31 @@
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager for commands
 
 // ----------------- PINS -----------------
-static const int PIN_POT    = 34;
-static const int PIN_BUTTON = 26;
-static const int PIN_STATUS = 27;
+#define PIN_POT    = 34;
+#define PIN_BUTTON = 26;
+#define PIN_STATUS = 27;
 
-static const int I2C_SDA = 21;
-static const int I2C_SCL = 22;
+const static int I2C_SDA = 21;
+const static int I2C_SCL = 22;
+
+const int PIN_encoderCLK = 34; // PinCLK
+const int PIN_encoderDT = 35; // PinDT
+const int PIN_encoderButton = 15; // PinSW
+
+int PIN_DATA = 5;
+
+// ----------------- Encoder -----------------
+volatile int encoderValue = 0;
+int lastReportedValue = 1;
+static int lastEncoderValue = 0;
+
+// Variables to debounce Rotary Encoder
+long TimeOfLastDebounce = 0;
+const int DelayofDebounce = 2; // Reduced debounce delay in milliseconds
+
+// Store previous Pins state
+int PreviousCLK;
+int PreviousDT;
 
 // ----------------- OLED -----------------
 static const uint8_t OLED_ADDR = 0x3C;
@@ -33,7 +52,74 @@ int selectedIndex = 0;
 int activeOption  = -1;
 unsigned long optionEnteredMs = 0;
 
+//=======================================================
+
+void IRAM_ATTR handleEncoderChange() {
+  int currentCLK = digitalRead(PIN_encoderCLK);
+  int currentDT = digitalRead(PIN_encoderDT);
+
+  if (PreviousCLK == 0 && currentCLK == 1) {
+    if (currentDT == 0) {
+      encoderValue++;  // Clockwise
+    } else {
+      encoderValue--;  // Counter-Clockwise
+    }
+  } else if (PreviousCLK == 1 && currentCLK == 0) {
+    if (currentDT == 1) {
+      encoderValue++;  // Clockwise
+    } else {
+      encoderValue--;  // Counter-Clockwise
+    }
+  }
+
+  PreviousCLK = currentCLK;
+  PreviousDT = currentDT;
+}
+
+void IRAM_ATTR handleButtonPress() {
+  unsigned long currentTime = millis();
+  if (currentTime - TimeOfLastDebounce > DelayofDebounce) {
+    TimeOfLastDebounce = currentTime;
+    Serial.println("Button Pressed!");
+  }
+}
+
+void readEncoderTask(void * pvParameters) {
+  for (;;) {
+    if (lastEncoderValue != encoderValue) {
+      // Handle encoder value changes
+      lastEncoderValue = encoderValue;
+    }
+    vTaskDelay(1 / portTICK_PERIOD_MS); // Delay for 1 ms
+  }
+}
+
+void encodersetup() {
+  pinMode(PIN_encoderCLK, INPUT);
+  pinMode(PIN_encoderDT, INPUT);
+  pinMode(PIN_encoderButton, INPUT_PULLUP);
+
+  attachInterrupt(digitalPinToInterrupt(PIN_encoderCLK), handleEncoderChange, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(PIN_encoderButton), handleButtonPress, FALLING);
+
+  PreviousCLK = digitalRead(PIN_encoderCLK);
+  PreviousDT = digitalRead(PIN_encoderDT);
+
+  xTaskCreatePinnedToCore(
+    readEncoderTask,    // Function to implement the task
+    "readEncoderTask",  // Name of the task
+    10000,              // Stack size in words
+    NULL,               // Task input parameter
+    1,                  // Priority of the task
+    NULL,               // Task handle
+    0                   // Core where the task should run
+  );
+}
+
 void wifisetup() {
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.println("Connecting to wifi...:");   
     WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
     // it is a good practice to make sure your code sets wifi mode how you want it.
  
@@ -62,13 +148,21 @@ void wifisetup() {
         // ESP.restart();
     } 
     else {
-        //if you get here you have connected to the WiFi    
+        //if you get here you have connected to the WiFi
+        
         Serial.println("connected...yeey :)");
     }
  
 } 
 
-void drawMenu(int index,) {
+void panelSetup() {
+  //i2c recieve on 
+  pinMode(PIN_DATA, OUTPUT);
+  PIN_DATA = HIGH;
+  //map i2c adresses to each panel
+}
+
+void drawMenu(int index) {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
@@ -85,20 +179,33 @@ void drawMenu(int index,) {
       display.fillRect(0, y - 1, 128, 8, SSD1306_WHITE);
       display.setTextColor(SSD1306_BLACK);
       display.print("> ");
-      display.print(MAIN_MENU[i]); // needs to be different print
-      display.setTextColor(SSD1306_WHITE);
-    } else {
+    }
+
+    switch (int menuNav = 0)  {
+      case 0
+        display.print(MAIN_MENU[i]); // needs to be different print
+        display.setTextColor(SSD1306_WHITE);
+      break;
+        
+      case 1
+        display.print(SETTINGS_MENU[i]); // needs to be different print
+        display.setTextColor(SSD1306_WHITE);
+      break;
+
+      }
+
+    else {
       display.print("  ");
       display.print(MAIN_MENU[i]); // needs to be different print
     }
   }
-
   display.display();
 }
 
+//========================================================================
 
 void setup() {
-  
+  encodersetup();
 
   Wire.begin(I2C_SDA, I2C_SCL);
   Wire.setClock(400000);
@@ -108,9 +215,20 @@ void setup() {
   }
 
   wifisetup();
+  panelSetup();
 }
  
 void loop() {
 
-drawMenu(selectedIndex); 
+  if (lastReportedValue != encoderValue) {
+    Serial.println(encoderValue);
+    lastReportedValue = encoderValue;
+  }
+  delay(10);
+  
+  drawMenu(selectedIndex); 
+
 }
+
+
+
