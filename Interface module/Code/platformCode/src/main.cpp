@@ -5,10 +5,12 @@
 
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager for commands
 
+// +++++++++++++++++++ TEMP/TEST pins & arguments +++++++++++++++++++
+
+const int PIN_potmeter = 34;
+const int PIN_button = 15;
+
 // ----------------- PINS -----------------
-#define PIN_POT    = 34;
-#define PIN_BUTTON = 26;
-#define PIN_STATUS = 27;
 
 const static int I2C_SDA = 21;
 const static int I2C_SCL = 22;
@@ -32,6 +34,8 @@ const int DelayofDebounce = 2; // Reduced debounce delay in milliseconds
 int PreviousCLK;
 int PreviousDT;
 
+bool buttonState;
+
 // ----------------- OLED -----------------
 static const uint8_t OLED_ADDR = 0x3C;
 static const int SCREEN_WIDTH  = 128;
@@ -39,11 +43,14 @@ static const int SCREEN_HEIGHT = 32;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 // ----------------- UI / MENU -----------------
-int activeMenu = 0;
+int activeMenu = 1;
 
-static const char* MAIN_MENU[4] = {"Make new", "Send saved", "Settings", "Dev options"};
-static const char* SETTINGS_MENU[3] = {"Brightness", "screen timer", "Option 3"};
-static const char* DEV_MENU[3] = {"Reconnect wifi", "reset wifi", "reconnect MQTT"};
+const char* MenuItems[][5] = {
+  {"Main menu", "Send art", "Settings", "Dev options","restart"},
+  {"Send options", "Make new", "send saved", "animation", "return"},
+  {"Settings", "Brightness", "led off timer", "sleep timer", "return"},
+  {"Dev options", "Reconnect wifi", "reset wifi", "reconnect MQTT", "return"}
+};
 
 enum UiState : uint8_t { STATE_MENU = 0, STATE_OPTION = 1 };
 UiState uiState = STATE_MENU;
@@ -80,6 +87,7 @@ void IRAM_ATTR handleButtonPress() {
   unsigned long currentTime = millis();
   if (currentTime - TimeOfLastDebounce > DelayofDebounce) {
     TimeOfLastDebounce = currentTime;
+    buttonState = true;
     Serial.println("Button Pressed!");
   }
 }
@@ -122,9 +130,6 @@ void wifisetup() {
     display.println("Connecting to wifi...:");   
     WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
     // it is a good practice to make sure your code sets wifi mode how you want it.
- 
-    // put your setup code here, to run once:
-    Serial.begin(115200);
     
     //WiFiManager, Local intialization. Once its business is done, there is no need to keep it around
     WiFiManager wm;
@@ -168,45 +173,60 @@ void drawMenu(int index) {
   display.setTextColor(SSD1306_WHITE);
 
   display.setCursor(0, 0);
-  display.println("Menu:");
-  
+  display.println(MenuItems[activeMenu][1]);//title of the menu
 
-  for (int i = 0; i < 3; i++) {
-    int y = 10 + i * 7;
+  for (int i = 1; i < 5; i++) {//start at 1 to skip the title of the menu
+    int y = 10 + (i-1) * 7; //calc the height of the cursur to get even spacing
     display.setCursor(0, y);
 
-    if (i == index) {
+    if (i == index) { 
       display.fillRect(0, y - 1, 128, 8, SSD1306_WHITE);
       display.setTextColor(SSD1306_BLACK);
       display.print("> ");
-    }
-
-    switch (int menuNav = 0)  {
-      case 0
-        display.print(MAIN_MENU[i]); // needs to be different print
-        display.setTextColor(SSD1306_WHITE);
-      break;
-        
-      case 1
-        display.print(SETTINGS_MENU[i]); // needs to be different print
-        display.setTextColor(SSD1306_WHITE);
-      break;
-
-      }
-
+      display.print(MenuItems[activeMenu][i]); 
+      display.setTextColor(SSD1306_WHITE); }
     else {
       display.print("  ");
-      display.print(MAIN_MENU[i]); // needs to be different print
+      display.print(MenuItems[activeMenu][i]); 
     }
   }
   display.display();
 }
 
+void buttonNav() {
+  if (activeMenu == 1 ) { //handles main menu navigation and is sold
+    if (selectedIndex == 5)
+    {
+      ESP.restart(); } //restart in menu is selected (restart esp)
+    else {
+      activeMenu = selectedIndex; }//go to the menu that is selected
+  }
+  else if (activeMenu != 1 && selectedIndex == 5) {
+  activeMenu = 1; } //return to main menu
+
+  else {
+    switch (activeMenu) {
+    case 2://send art
+      
+    break;
+    
+    case 3://settings
+      
+    break;
+
+    case 4://dev options
+
+    break;
+    }
+  }
+  buttonState = false;
+}
 //========================================================================
 
 void setup() {
-  encodersetup();
+  Serial.begin(116500);
 
+  //display first
   Wire.begin(I2C_SDA, I2C_SCL);
   Wire.setClock(400000);
 
@@ -214,8 +234,20 @@ void setup() {
     while (true) { delay(100); }
   }
 
+  //display a little logo WIP
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.println("Pixelpanel logo tm");   
+  delay(2000);
+
+  //input devices 2nd
+  encodersetup();
+
+  //wifi before panel setup due to possible instability
   wifisetup();
-  panelSetup();
+
+  panelSetup(); //still need to be implemented, will handle i2c communication and panel mapping
+  
 }
  
 void loop() {
@@ -224,10 +256,15 @@ void loop() {
     Serial.println(encoderValue);
     lastReportedValue = encoderValue;
   }
+
   delay(10);
-  
+  selectedIndex = map(analogRead(PIN_potmeter), 0, 4095, 0, 5);//temp solution for testing, will be removed when encoder is fully implemented
   drawMenu(selectedIndex); 
 
+
+  if (buttonState){
+    buttonNav();
+  }
 }
 
 
