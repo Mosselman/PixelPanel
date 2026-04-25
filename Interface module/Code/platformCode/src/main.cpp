@@ -3,6 +3,9 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+#include <WiFiClientSecure.h>
+#include <PubSubClient.h>
+
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager for commands
 
 // +++++++++++++++++++ TEMP/TEST pins & arguments +++++++++++++++++++
@@ -30,7 +33,7 @@ static int lastEncoderValue = 0;
 long TimeOfLastDebounce = 0;
 const int DelayofDebounce = 2; // Reduced debounce delay in milliseconds
 
-// Store previous Pins state
+// Store previous Pins state QUE??
 int PreviousCLK;
 int PreviousDT;
 
@@ -59,9 +62,51 @@ int selectedIndex = 0;
 int activeOption  = -1;
 unsigned long optionEnteredMs = 0;
 
+
+// ----------------- MQTT -----------------
+/*const char* mqtt_broker = "XXXXXXXXX";
+const int mqtt_port = 8883;
+const char* mqtt_username = "XXXX";
+const char* mqtt_password = "XXXXX";
+
+WiFiClientSecure wifiClient;
+PubSubClient mqttClient(wifiClient);
+
+void setupMQTT() {
+  mqttClient.setServer(mqtt_broker, mqtt_port);
+}
+
+void reconnect() {
+  Serial.println("Connecting to MQTT Broker...");
+  while (!mqttClient.connected()) {
+    Serial.println("Reconnecting to MQTT Broker...");
+    String clientId = "ESP32Client-";
+    clientId += String(random(0xffff), HEX);
+    
+    if (mqttClient.connect(clientId.c_str(), mqtt_username, mqtt_password)) {
+      Serial.println("Connected to MQTT Broker.");
+    } else {
+      Serial.print("Failed, rc=");
+      Serial.print(mqttClient.state());
+      Serial.println(" try again in 5 seconds");
+      delay(5000);
+    }
+  }
+}
+
+void mqttFunction() {
+  if (!mqttClient.connected()) {
+    reconnect();
+  }
+  mqttClient.loop();
+}
+*/
 //=======================================================
 
-void IRAM_ATTR handleEncoderChange() {
+
+
+//void IRAM_ATTR
+void handleEncoderChange() {
   int currentCLK = digitalRead(PIN_encoderCLK);
   int currentDT = digitalRead(PIN_encoderDT);
 
@@ -82,8 +127,8 @@ void IRAM_ATTR handleEncoderChange() {
   PreviousCLK = currentCLK;
   PreviousDT = currentDT;
 }
-
-void IRAM_ATTR handleButtonPress() {
+// void IRAM_ATTR
+void handleButtonPress() {
   unsigned long currentTime = millis();
   if (currentTime - TimeOfLastDebounce > DelayofDebounce) {
     TimeOfLastDebounce = currentTime;
@@ -124,6 +169,7 @@ void encodersetup() {
   );
 }
 
+
 void wifisetup() {
     display.clearDisplay();
     display.setCursor(0, 0);
@@ -134,8 +180,6 @@ void wifisetup() {
     //WiFiManager, Local intialization. Once its business is done, there is no need to keep it around
     WiFiManager wm;
  
-    // reset settings - wipe stored credentials for testing
-    // these are stored by the esp library
     //wm.resetSettings();
  
     // Automatically connect using saved credentials,
@@ -158,6 +202,8 @@ void wifisetup() {
         Serial.println("connected...yeey :)");
     }
  
+  //wifiClient.setInsecure(); // Use this only for testing, it allows connecting without a root certificate
+  //setupMQTT();
 } 
 
 void panelSetup() {
@@ -224,15 +270,18 @@ void buttonNav() {
 //========================================================================
 
 void setup() {
-  Serial.begin(116500);
-
+  Serial.begin(115200);
+  Serial.println("Starting setup...");
+  wifisetup();
   //display first
   Wire.begin(I2C_SDA, I2C_SCL);
   Wire.setClock(400000);
 
+  /*
   if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
     while (true) { delay(100); }
   }
+  */
 
   //display a little logo WIP
   display.clearDisplay();
@@ -244,13 +293,14 @@ void setup() {
   encodersetup();
 
   //wifi before panel setup due to possible instability
-  wifisetup();
+  
 
   panelSetup(); //still need to be implemented, will handle i2c communication and panel mapping
   
 }
  
 void loop() {
+  //mqttFunction();
 
   if (lastReportedValue != encoderValue) {
     Serial.println(encoderValue);
